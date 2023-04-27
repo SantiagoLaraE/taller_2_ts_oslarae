@@ -1,4 +1,7 @@
+import { createStudentCheck } from "../forms";
+import { modalCreateBT } from "../modals";
 import { tableBody } from "../nodes";
+import { showNotificationMessage } from "../notifications";
 import Token from "../token";
 import { StudentService } from "./students.service";
 import { generateStudentTemplate } from "./students.template";
@@ -26,6 +29,28 @@ export const renderStudents = async () => {
 
 
   setLoading(false);
+};
+
+export const createStudent = async (event: SubmitEvent) => {
+  setLoading(true);
+  const student = createStudentCheck(event);
+  if (student) {
+    try {
+      const response = await studentsService.create(student);
+      if (response) {
+        showNotificationMessage(
+          "El estudiante ha sido creado correctamente",
+          "success"
+        );
+        renderStudents();
+      }
+      modalCreateBT.hide();
+    } catch (error) {
+      showNotificationMessage(`${error}`, "danger");
+    }
+  }
+  setLoading(false);
+
 };
 
 export const setLoading = (loading: boolean) => {

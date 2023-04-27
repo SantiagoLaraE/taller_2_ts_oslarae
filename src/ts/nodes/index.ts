@@ -1,6 +1,6 @@
 export const btnCancel = document.getElementById("cancel-modal") as HTMLButtonElement;
 
-export const formStudent = document.querySelector("#form-student") as HTMLFormElement;
+export const formCreateStudent = document.querySelector("#form-student") as HTMLFormElement;
 
 export const formUpdateStudent = document.querySelector("#form-update-student") as HTMLFormElement;
 
