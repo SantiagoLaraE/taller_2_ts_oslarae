@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+</head>
+
+<body class="vh-100">
+    <main class="form-signin w-100 m-auto text-center">
+        <form id="login-form" class="needs-validation" novalidate>
+            <h1 class="h3 mb-3 fw-normal">Inicia sesión</h1>
+
+            <div class="form-floating">
+                <input type="number" class="form-control" id="identification" name="identification"
+                    placeholder="Número de Identificación" required>
+                <label for="identification">Número de Identificación</label>
+            </div>
+
+
+            <div class="form-floating">
+                <input type="email" class="form-control" id="mail" name="mail" placeholder="name@example.com" required>
+                <label for="mail">Correo electrónico</label>
+            </div>
+
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="rememberme"> Recuérdame
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
+            <p class="mt-5 mb-3 text-body-secondary">© Santiago Lara Escobar - CO</p>
+        </form>
+    </main>
+    <script type="module" src="/src/ts/login.ts"></script>
+</body>
+
+</html>
