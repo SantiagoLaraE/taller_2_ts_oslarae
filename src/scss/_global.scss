@@ -17,3 +17,14 @@ html {
   --bs-btn-active-bg: #{shade-color(#3f8db6, 20%)};
   --bs-btn-active-border-color: #{shade-color(#3f8db6, 20%)};
 }
+
+.btn-outline-primary {
+  --bs-btn-color: var(--light-blue);
+  --bs-btn-border-color: var(--light-blue);
+  --bs-btn-hover-bg: var(--light-blue);
+  --bs-btn-hover-border-color: var(--light-blue);
+  --bs-btn-active-bg: var(--light-blue);
+  --bs-btn-active-border-color: var(--light-blue);
+  --bs-btn-disabled-color: var(--light-blue);
+  --bs-btn-disabled-border-color: var(--light-blue);
+}

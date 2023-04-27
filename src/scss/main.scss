@@ -1,1 +1,23 @@
 @import "./global";
+
+.hero {
+  background: #0f2027;
+  background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+}
+
+.students {
+  margin-top: -32px;
+  padding: 12px;
+  border-radius: 16px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.2);
+}
+
+tr {
+  vertical-align: middle;
+}
+
+.form-check-input:checked {
+  background-color: var(--light-blue);
+  border-color: var(--light-blue);
+}
