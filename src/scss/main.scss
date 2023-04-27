@@ -19,6 +19,25 @@
   font-weight: 500;
 }
 
+.table-body.loading {
+  position: relative;
+  opacity: 0.5;
+  pointer-events: none;
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 54px;
+    height: 54px;
+    background-color: var(--light-blue);
+    border-radius: 27px;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: loading 0.6s linear infinite;
+  }
+}
+
 tr {
   vertical-align: middle;
 }
