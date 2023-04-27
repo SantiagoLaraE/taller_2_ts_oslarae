@@ -27,3 +27,10 @@ tr {
   background-color: var(--light-blue);
   border-color: var(--light-blue);
 }
+
+#notification {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+}
