@@ -32,8 +32,13 @@ class Token {
   }
 
   static getToken(): string {
-    const token = sessionStorage.getItem(Token.sessionKey);
-    return token !== null ? token : "";
+    const response = sessionStorage.getItem(Token.sessionKey);
+    if(response !== null){
+      const {token} = JSON.parse(response);
+      return token;
+    }else{
+      return "";
+    }
   }
 
   static validateSessionToken() {
