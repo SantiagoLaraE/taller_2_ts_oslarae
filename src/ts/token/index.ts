@@ -31,7 +31,7 @@ class Token {
     }
   }
 
-  getToken(): string {
+  static getToken(): string {
     const token = sessionStorage.getItem(Token.sessionKey);
     return token !== null ? token : "";
   }
