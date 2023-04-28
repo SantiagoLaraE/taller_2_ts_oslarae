@@ -3,32 +3,42 @@ import { modalCreateBT } from "../modals";
 import { tableBody } from "../nodes";
 import { showNotificationMessage } from "../notifications";
 import Token from "../token";
+import { getStudentsDTO } from "./students.dto";
 import { StudentService } from "./students.service";
 import { generateStudentTemplate } from "./students.template";
 
 const token = Token.getToken();
 const studentsService = new StudentService(token);
 
-export const renderStudents = async () => {
+export const getStudents = async (): Promise<getStudentsDTO[]> => {
   setLoading(true);
-  const students = await studentsService.getAll();
-  const fragment = new DocumentFragment();
+  try {
+    const students = await studentsService.getAll();
+    setLoading(false);
+    return students;
+  } catch (error) {
+    showNotificationMessage(`${error}`, "danger");
+    setLoading(false);
+    return [];
+  }
+};
 
+export const renderStudents = async () => {
+  const students = await getStudents();
+  const fragment = new DocumentFragment();
   tableBody.innerHTML = "";
 
-  if(students.length > 0 ){
+  if (students.length > 0) {
     students.forEach((student) => {
-        const studentTemplate = generateStudentTemplate(student);
-        fragment.appendChild(studentTemplate);
-      });
-    
-      tableBody.appendChild(fragment);
-  }else{
-    tableBody.innerHTML = "<tr><td class='no-students' colspan='100%'>No hay estudiantes creados</td></tr>";
+      const studentTemplate = generateStudentTemplate(student);
+      fragment.appendChild(studentTemplate);
+    });
+
+    tableBody.appendChild(fragment);
+  } else {
+    tableBody.innerHTML =
+      "<tr><td class='no-students' colspan='100%'>No hay estudiantes creados</td></tr>";
   }
-
-
-  setLoading(false);
 };
 
 export const createStudent = async (event: SubmitEvent) => {
@@ -37,20 +47,17 @@ export const createStudent = async (event: SubmitEvent) => {
   if (student) {
     try {
       const response = await studentsService.create(student);
-      if (response) {
-        showNotificationMessage(
-          "El estudiante ha sido creado correctamente",
-          "success"
-        );
-        renderStudents();
-      }
+      showNotificationMessage(
+        `${response?.message}`,
+        "success"
+      );
+      renderStudents();
       modalCreateBT.hide();
     } catch (error) {
       showNotificationMessage(`${error}`, "danger");
     }
   }
   setLoading(false);
-
 };
 
 export const setLoading = (loading: boolean) => {
