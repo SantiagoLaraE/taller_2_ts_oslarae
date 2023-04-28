@@ -3,8 +3,10 @@
 
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + TS</title>
+  <meta name="description" content="Taller de TypeScript para el manejo de estudiantes">
+  <title>Estudiantes | Taller TypeScript</title>
 </head>
 
 <body>
@@ -66,7 +68,7 @@
     <div class="modal-dialog">
       <form id="form-student" class="modal-content needs-validation" novalidate>
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modal-create-student">Agregar estudiante</h1>
+          <h1 class="modal-title fs-5">Agregar estudiante</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body row">
@@ -158,7 +160,7 @@
     <div class="modal-dialog">
       <form id="form-update-student" class="modal-content needs-validation" novalidate>
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modal-update-student">Actualizar estudiante</h1>
+          <h1 class="modal-title fs-5">Actualizar estudiante</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body row">
@@ -166,8 +168,8 @@
           <input type="hidden" name="id">
 
           <div class="col-md-12 mb-2">
-            <label for="tipoIdentificacion" class="form-label">Tipo de Identificacion</label>
-            <select class="form-select" id="tipoIdentificacion" name="tipoIdentificacion" required>
+            <label for="tipoIdentificacion-u" class="form-label">Tipo de Identificacion</label>
+            <select class="form-select" id="tipoIdentificacion-u" name="tipoIdentificacion" required>
               <option selected disabled value="">Selecciona una opción</option>
               <option value="1">Cédula de Ciudadanía</option>
               <option value="2">Tarjeta de identidad</option>
@@ -179,8 +181,8 @@
           </div>
 
           <div class="col-md-12 mb-2">
-            <label for="numeroIdentificacion" class="form-label">Número de Identificacion</label>
-            <input type="number" class="form-control" id="numeroIdentificacion" name="numeroIdentificacion" required>
+            <label for="numeroIdentificacion-u" class="form-label">Número de Identificacion</label>
+            <input type="number" class="form-control" id="numeroIdentificacion-u" name="numeroIdentificacion" required>
             <div class="invalid-feedback">
               Por favor ingresa tu número de identificacion
             </div>
@@ -189,40 +191,40 @@
           <input type="hidden" id="id" name="id" required>
 
           <div class="col-md-6 mb-2">
-            <label for="nombres" class="form-label">Nombres</label>
-            <input type="text" class="form-control" id="nombres" name="nombres" required>
+            <label for="nombres-u" class="form-label">Nombres</label>
+            <input type="text" class="form-control" id="nombres-u" name="nombres" required>
             <div class="invalid-feedback">
               Por favor ingresa tu nombre
             </div>
           </div>
 
           <div class="col-md-6 mb-2">
-            <label for="apellidos" class="form-label">Apellidos</label>
-            <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+            <label for="apellidos-2" class="form-label">Apellidos</label>
+            <input type="text" class="form-control" id="apellidos-2" name="apellidos" required>
             <div class="invalid-feedback">
               Por favor ingresa tu apellidos
             </div>
           </div>
 
           <div class="col-md-12 mb-2">
-            <label for="correo" class="form-label">Correo</label>
-            <input type="email" class="form-control" id="correo" name="correo" required>
+            <label for="correo-2" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="correo-2" name="correo" required>
             <div class="invalid-feedback">
               Por favor ingresa tu correo
             </div>
           </div>
 
           <div class="col-md-12 mb-2">
-            <label for="celular" class="form-label">Celular</label>
-            <input type="number" class="form-control" id="celular" name="celular" required>
+            <label for="celular-2" class="form-label">Celular</label>
+            <input type="number" class="form-control" id="celular-2" name="celular" required>
             <div class="invalid-feedback">
               Por favor ingresa tu número de celular
             </div>
           </div>
 
           <div class="col-md-12 mb-2">
-            <label for="linkedin" class="form-label">LinkedIn</label>
-            <input type="text" class="form-control" id="linkedin" name="linkedin"
+            <label for="linkedin-2" class="form-label">LinkedIn</label>
+            <input type="text" class="form-control" id="linkedin-2" name="linkedin"
               pattern="https?://linkedin.com/in/[a-zA-Z0-9]{3,}" placeholder="https://linkedin.com/in/myuser" required>
             <div class="invalid-feedback">
               Por favor ingresa una URL válida de linkedin
@@ -231,8 +233,8 @@
           </div>
 
           <div class="col-md-12 mb-2">
-            <label for="github" class="form-label">Github</label>
-            <input type="text" class="form-control" id="github" name="github"
+            <label for="github-2" class="form-label">Github</label>
+            <input type="text" class="form-control" id="github-2" name="github"
               pattern="https?://github.com/[a-zA-Z0-9]{3,}" placeholder="https://github.com/myuser" required>
             <div class="invalid-feedback">
               Por favor ingresa una URL válida de github
@@ -241,7 +243,7 @@
         </div>
 
         <div class="modal-footer flex flex-nowrap">
-          <button id="cancel-modal" type="button" class="btn btn-outline-primary w-100"
+          <button type="button" class="btn btn-outline-primary w-100"
             data-bs-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-primary w-100">Enviar</button>
         </div>

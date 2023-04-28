@@ -23,11 +23,8 @@ class Token {
         throw new Error(data.message);
       }
 
-      console.log(data.token);
-      alert(data.token);
       return data.token;
     } catch (error) {
-      console.log(error);
       return undefined;
     }
   }

@@ -19,20 +19,20 @@ export const generateStudentTemplate = (s: getStudentsDTO) => {
   row.insertCell(5).innerHTML = `<a href="${s.estudiante_linkedin}" class="btn btn-sm btn-outline-primary" target="_blank">Ver LinkedIn</a>`;
   row.insertCell(6).innerHTML = `<a href="${s.estudiante_github}" class="btn btn-sm btn-outline-primary" target="_blank">Ver Github</a>`;
 
-  const swtichDiv = document.createElement('div')as HTMLDivElement;
-  swtichDiv.classList.add('form-check', 'form-switch');
+  const swtichLabel = document.createElement('label')as HTMLLabelElement;
+  swtichLabel.classList.add('form-check', 'form-switch');
 
   const switchInput = document.createElement('input') as HTMLInputElement;
   switchInput.classList.add('form-check-input');
   switchInput.type = "checkbox";
-  switchInput.role = "swtich";
+  switchInput.ariaLabel = `state-student-${s.estudiante_id}`;
   switchInput.checked = s.estudiante_estado.toLowerCase() === "activo" ? true : false;
   switchInput.addEventListener('change', (e: Event)=>{
     const state = e.target as HTMLInputElement;
     updateStateStudent(s.estudiante_id, state.checked);
   })
-  swtichDiv.appendChild(switchInput);
-  row.insertCell(7).appendChild(swtichDiv);
+  swtichLabel.appendChild(switchInput);
+  row.insertCell(7).appendChild(swtichLabel);
 
   const btnUpdate = document.createElement("button");
   btnUpdate.classList.add("btn", "btn-primary", "btn-sm");
@@ -40,6 +40,7 @@ export const generateStudentTemplate = (s: getStudentsDTO) => {
   btnUpdate.addEventListener("click", ()=> {
     showUpdateModal(s.estudiante_id);
   })
+  btnUpdate.setAttribute("aria-label", `Update ${s.estudiante_id} student`);
   row.insertCell(8).appendChild(btnUpdate);
 
   return row;

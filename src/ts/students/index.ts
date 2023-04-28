@@ -107,7 +107,6 @@ export const updateStateStudent = async (
   state ? (studentState = "Activo") : (studentState = "Inactivo");
   try {
     const response = await studentsService.updateState(id, studentState);
-    console.log(response);
     if (response) {
       showNotificationMessage(
         "El estado del estudiante ha sido actualizado exitosamente",
