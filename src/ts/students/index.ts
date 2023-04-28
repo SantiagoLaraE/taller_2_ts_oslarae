@@ -1,9 +1,10 @@
-import { createStudentCheck } from "../forms";
+import { createStudentCheck, updateStudentCheck } from "../forms";
 import { modalCreateBT } from "../modals";
 import { tableBody } from "../nodes";
 import { showNotificationMessage } from "../notifications";
 import Token from "../token";
 import { getStudentsDTO } from "./students.dto";
+import { IStudent} from "./students.model";
 import { StudentService } from "./students.service";
 import { generateStudentTemplate } from "./students.template";
 
@@ -47,12 +48,46 @@ export const createStudent = async (event: SubmitEvent) => {
   if (student) {
     try {
       const response = await studentsService.create(student);
-      showNotificationMessage(
-        `${response?.message}`,
-        "success"
-      );
+      showNotificationMessage(`${response?.message}`, "success");
       renderStudents();
       modalCreateBT.hide();
+    } catch (error) {
+      showNotificationMessage(`${error}`, "danger");
+    }
+  }
+  setLoading(false);
+};
+
+export const findOneStudent = async (
+  id: IStudent["estudiante_id"]
+): Promise<IStudent | undefined> => {
+  setLoading(true);
+  try {
+    const student = await studentsService.findOne(id);
+    setLoading(false);
+    return student;
+  } catch (error) {
+    showNotificationMessage(`${error}`, "danger");
+    setLoading(false);
+    return undefined;
+  }
+};
+
+export const updateStudent = async (event: SubmitEvent) => {
+  setLoading(true);
+  const student = updateStudentCheck(event);
+  if(!student){
+    showNotificationMessage("No hubieron cambios", "warning")
+  }else{
+    try {
+      const response = await studentsService.update(student.id, student.changes);
+      if (response) {
+        showNotificationMessage(
+          "El estudiante ha sido actualizado correctamente",
+          "success"
+        );
+        renderStudents();
+      }
     } catch (error) {
       showNotificationMessage(`${error}`, "danger");
     }

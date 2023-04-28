@@ -1,3 +1,4 @@
+import { showUpdateModal } from "../modals";
 import { getStudentsDTO } from "./students.dto";
 
 const editIcon = `
@@ -31,6 +32,9 @@ export const generateStudentTemplate = (s: getStudentsDTO) => {
   const btnUpdate = document.createElement("button");
   btnUpdate.classList.add("btn", "btn-primary", "btn-sm");
   btnUpdate.innerHTML = editIcon;
+  btnUpdate.addEventListener("click", ()=> {
+    showUpdateModal(s.estudiante_id);
+  })
   row.insertCell(8).appendChild(btnUpdate);
 
   return row;

@@ -1,6 +1,6 @@
 import "../scss/main.scss";
-import { btnRemoveSession, formCreateStudent} from "./nodes";
-import { createStudent, renderStudents } from "./students";
+import { btnRemoveSession, formCreateStudent, formUpdateStudent} from "./nodes";
+import { createStudent, renderStudents, updateStudent } from "./students";
 import Token from "./token";
 
 !Token.validateSessionToken() ? window.location.replace("/login/") : null;
@@ -8,6 +8,8 @@ import Token from "./token";
 renderStudents();
 
 formCreateStudent.addEventListener("submit", createStudent);
+
+formUpdateStudent.addEventListener("submit", updateStudent);
 
 btnRemoveSession.addEventListener("click", Token.removeSession);
 

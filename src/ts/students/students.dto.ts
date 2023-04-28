@@ -13,3 +13,5 @@ export interface createStudentDTO {
   linkedin: IStudent["estudiante_linkedin"];
   github: IStudent["estudiante_github"];
 }
+
+export interface updateStudentDTO extends Partial<createStudentDTO> {}

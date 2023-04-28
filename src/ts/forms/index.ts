@@ -1,6 +1,8 @@
 import { Modal } from "bootstrap";
-import { createStudentDTO } from "../students/students.dto";
-import { modalCreateBT } from "../modals";
+import { createStudentDTO, updateStudentDTO } from "../students/students.dto";
+import { modalCreateBT, modalUpdateBT } from "../modals";
+import { IStudent } from "../students/students.model";
+import { modalUpdateStudent } from "../nodes";
 
 export const createStudentCheck = (
   event: SubmitEvent
@@ -21,6 +23,25 @@ export const createStudentCheck = (
   return null;
 };
 
+export const updateStudentCheck = (
+  event: SubmitEvent
+): { id: IStudent["estudiante_id"]; changes: updateStudentDTO } | null => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  const form = event.target as HTMLFormElement;
+  form.classList.add("was-validated");
+
+  if (form.checkValidity()) {
+    const student = formDataToUpdateStudentDTO(form);
+    resetForm(form, modalUpdateBT);
+    if (Object.entries(student.changes).length > 0) {
+      return student;
+    }
+  }
+  return null;
+};
+
 const formDataToCreateStudentDTO = (
   form: HTMLFormElement
 ): createStudentDTO => {
@@ -37,6 +58,38 @@ const formDataToCreateStudentDTO = (
   };
 
   return object;
+};
+
+const formDataToUpdateStudentDTO = (
+  form: HTMLFormElement
+): { id: IStudent["estudiante_id"]; changes: updateStudentDTO } => {
+  const formData = new FormData(form);
+  const id: IStudent["estudiante_id"] = Number(formData.get("id"));
+  const changes = formDataToCreateStudentDTO(form);
+
+  formData.forEach((value, key) => {
+    const dataValue = form
+      .querySelector(`[name=${key}]`)
+      ?.getAttribute("data-value");
+    if (dataValue === value) {
+      const index = key as keyof updateStudentDTO;
+      delete changes[index];
+    }
+  });
+
+  return { changes, id };
+};
+
+export const fillUpdateForm = (student: IStudent) => {
+  const fields = modalUpdateStudent.querySelectorAll(
+    "*[name]"
+  ) as NodeListOf<HTMLInputElement>;
+
+  fields.forEach((field) => {
+    const index = ("estudiante_" + field.name) as keyof IStudent;
+    field.value = student[index].toString();
+    field.dataset.value = student[index].toString();
+  });
 };
 
 const resetForm = (form: HTMLFormElement, modal: Modal) => {
