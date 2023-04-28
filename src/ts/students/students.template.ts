@@ -1,3 +1,4 @@
+import { updateStateStudent } from ".";
 import { showUpdateModal } from "../modals";
 import { getStudentsDTO } from "./students.dto";
 
@@ -26,6 +27,10 @@ export const generateStudentTemplate = (s: getStudentsDTO) => {
   switchInput.type = "checkbox";
   switchInput.role = "swtich";
   switchInput.checked = s.estudiante_estado.toLowerCase() === "activo" ? true : false;
+  switchInput.addEventListener('change', (e: Event)=>{
+    const state = e.target as HTMLInputElement;
+    updateStateStudent(s.estudiante_id, state.checked);
+  })
   swtichDiv.appendChild(switchInput);
   row.insertCell(7).appendChild(swtichDiv);
 

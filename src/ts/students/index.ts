@@ -4,7 +4,7 @@ import { tableBody } from "../nodes";
 import { showNotificationMessage } from "../notifications";
 import Token from "../token";
 import { getStudentsDTO } from "./students.dto";
-import { IStudent} from "./students.model";
+import { IStudent, StudentState } from "./students.model";
 import { StudentService } from "./students.service";
 import { generateStudentTemplate } from "./students.template";
 
@@ -76,11 +76,14 @@ export const findOneStudent = async (
 export const updateStudent = async (event: SubmitEvent) => {
   setLoading(true);
   const student = updateStudentCheck(event);
-  if(!student){
-    showNotificationMessage("No hubieron cambios", "warning")
-  }else{
+  if (!student) {
+    showNotificationMessage("No hubieron cambios", "warning");
+  } else {
     try {
-      const response = await studentsService.update(student.id, student.changes);
+      const response = await studentsService.update(
+        student.id,
+        student.changes
+      );
       if (response) {
         showNotificationMessage(
           "El estudiante ha sido actualizado correctamente",
@@ -92,6 +95,30 @@ export const updateStudent = async (event: SubmitEvent) => {
       showNotificationMessage(`${error}`, "danger");
     }
   }
+  setLoading(false);
+};
+
+export const updateStateStudent = async (
+  id: IStudent["estudiante_id"],
+  state: boolean
+) => {
+  setLoading(true);
+  let studentState: StudentState;
+  state ? (studentState = "Activo") : (studentState = "Inactivo");
+  try {
+    const response = await studentsService.updateState(id, studentState);
+    console.log(response);
+    if (response) {
+      showNotificationMessage(
+        "El estado del estudiante ha sido actualizado exitosamente",
+        "success"
+      );
+      renderStudents();
+    }
+  } catch (error) {
+    showNotificationMessage(`${error}`, "danger");
+  }
+
   setLoading(false);
 };
 

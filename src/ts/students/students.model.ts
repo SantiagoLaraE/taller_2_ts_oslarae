@@ -1,5 +1,5 @@
 export type IDType = "1" | "2" | "3";
-export type studentState = "Activo" | "Inactivo";
+export type StudentState = "Activo" | "Inactivo";
 
 export interface IStudent {
   estudiante_id: number;
@@ -11,6 +11,6 @@ export interface IStudent {
   estudiante_correo: string;
   estudiante_linkedin: string;
   estudiante_github: string;
-  estudiante_estado: studentState;
+  estudiante_estado: StudentState;
   estudiante_fechaCreacion: Date;
 }

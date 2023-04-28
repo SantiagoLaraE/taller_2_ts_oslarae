@@ -3,7 +3,7 @@ import {
   getStudentsDTO,
   updateStudentDTO,
 } from "./students.dto";
-import { IStudent } from "./students.model";
+import { IStudent, StudentState } from "./students.model";
 
 export class StudentService {
   private url_api = "https://apiestudiantes.maosystems.dev/estudiantes";
@@ -84,5 +84,28 @@ export class StudentService {
     }
 
     return data.data;
+  }
+
+  async updateState(
+    id: IStudent["estudiante_id"],
+    estado: StudentState
+  ): Promise<IStudent> {
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.token,
+      },
+      body: JSON.stringify({ estado }),
+    };
+
+    const response = await fetch(`${this.url_api}/estado/${id}`, options);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    return data;
   }
 }
