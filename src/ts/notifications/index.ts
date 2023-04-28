@@ -11,11 +11,12 @@ export const showNotificationMessage = (
 ) => {
   const body = notification.querySelector(".toast-body") as HTMLDivElement;
   body.innerHTML = message;
+
+  notification.classList.forEach((value)=>{
+    if (value.startsWith("text-bg-")) {notification.classList.remove(value);}
+  })
+
   notification.classList.add(`text-bg-${type}`);
 
   notificationBootstrap.show();
-
-  notification.addEventListener("hidden.bs.toast", () => {
-    notification.classList.remove(`text-bg-${type}`);
-  });
 };
