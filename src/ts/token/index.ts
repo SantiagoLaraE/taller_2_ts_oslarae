@@ -6,7 +6,10 @@ class Token {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: `{"identificacion":${this.identification},"correo":"${this.mail}"}`,
+      body: JSON.stringify({
+        identificacion: this.identification,
+        correo: this.mail,
+      }),
     };
 
     try {
@@ -14,8 +17,15 @@ class Token {
         "https://apiestudiantes.maosystems.dev/tokens",
         options
       );
-      const token = await response.text();
-      return token;
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      console.log(data.token);
+      alert(data.token);
+      return data.token;
     } catch (error) {
       console.log(error);
       return undefined;
@@ -26,17 +36,17 @@ class Token {
     const token = await this.requestToken();
 
     if (token) {
-      sessionStorage.setItem(Token.sessionKey, token);
+      sessionStorage.setItem(Token.sessionKey, JSON.stringify(token));
       window.location.replace("../");
     }
   }
 
   static getToken(): string {
     const response = sessionStorage.getItem(Token.sessionKey);
-    if(response !== null){
-      const {token} = JSON.parse(response);
+    if (response !== null) {
+      const token = JSON.parse(response);
       return token;
-    }else{
+    } else {
       return "";
     }
   }
